@@ -516,7 +516,7 @@
   <div class="arch-diagram">
     <div class="arch-label">Agent Frameworks & LLMs</div>
     <div class="arch-row">
-      <div class="arch-box" style="background:#64748b">LangChain</div>
+      <div class="arch-box" style="background:#64748b">Aleria OS</div>
       <div class="arch-box" style="background:#64748b">AutoGen</div>
       <div class="arch-box" style="background:#64748b">CrewAI</div>
       <div class="arch-box" style="background:#64748b">Custom</div>
@@ -540,7 +540,6 @@
       <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">WASM<br/>Sandbox</div>
       <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Ed25519<br/>Auth</div>
       <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Immutable<br/>Audit</div>
-      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Human-in-<br/>the-Loop</div>
       <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Budget<br/>Enforce</div>
     </div>
   </div>
@@ -565,23 +564,29 @@
     </div>
     <div>
       <div class="section-header">SIF — The Agent Firewall</div>
-      <p class="body-text" style="margin-bottom:8px">
-        Every message — user↔agent, agent↔agent, agent↔tool — passes through SIF <strong>before it reaches the model</strong> and before it leaves the stack. Sub-20ms classification latency.
+      <p class="body-text" style="margin-bottom:6px">
+        Every message — user↔agent, agent↔agent, agent↔tool — passes through SIF <strong>before it reaches the model</strong> and before it leaves the stack. Sub-20ms classification. Rust-based.
       </p>
-      <div class="pipeline">
-        <div class="pipeline-stage" style="background:var(--purple)">Unified<br/>Server<div class="stage-label">Normalise</div></div>
-        <div class="pipeline-stage" style="background:#7c3aed">Rule<br/>Engine<div class="stage-label">Pattern Match</div></div>
-        <div class="pipeline-stage" style="background:#6d28d9">ML<br/>Detection<div class="stage-label">ONNX Inference</div></div>
-        <div class="pipeline-stage" style="background:#5b21b6">DLP<br/>Scanner<div class="stage-label">PII & Secrets</div></div>
-        <div class="pipeline-stage" style="background:var(--dark)">Decision<br/>Engine<div class="stage-label">Allow / Block / Flag</div></div>
+      <!-- SIF flow diagram - compact -->
+      <div style="background:var(--bg-light);border:1px solid var(--border);border-radius:6px;padding:5px 8px 4px;display:grid;row-gap:0px;">
+        <div style="text-align:center"><span style="display:inline-block;border:1.5px solid var(--orange);border-radius:4px;padding:2px 10px;font-size:6.5px;font-weight:700;color:var(--orange);">Policy Dashboard</span></div>
+        <div style="text-align:center;color:var(--text-light);font-size:7px;line-height:1;">▼</div>
+        <div style="text-align:center"><span style="display:inline-block;border:1.5px solid var(--purple);border-radius:4px;padding:2px 10px;font-size:6.5px;font-weight:700;color:var(--purple);">Unified Server <span style="font-weight:500;color:var(--text-light);font-size:6px;">normalise · clean · scrub</span></span></div>
+        <div style="text-align:center;color:var(--text-light);font-size:7px;line-height:1;">▼</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;">
+          <div style="border:1.5px solid var(--purple);border-radius:4px;padding:2px 3px;text-align:center;font-size:6px;font-weight:700;color:var(--purple);">Rule Engine<br/><span style="font-weight:500;color:var(--text-light);font-size:5.5px;">matching · eval</span></div>
+          <div style="border:1.5px solid var(--purple);border-radius:4px;padding:2px 3px;text-align:center;font-size:6px;font-weight:700;color:var(--purple);">ML Detection<br/><span style="font-weight:500;color:var(--text-light);font-size:5.5px;">anomaly · ONNX</span></div>
+          <div style="border:1.5px solid var(--purple);border-radius:4px;padding:2px 3px;text-align:center;font-size:6px;font-weight:700;color:var(--purple);">DLP Scanner<br/><span style="font-weight:500;color:var(--text-light);font-size:5.5px;">PII · secrets</span></div>
+        </div>
+        <div style="text-align:center;color:var(--text-light);font-size:7px;line-height:1;">▼</div>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;">
+          <div></div>
+          <span style="display:inline-block;border:1.5px solid var(--purple);border-radius:4px;padding:2px 10px;font-size:6.5px;font-weight:700;color:var(--purple);">Decision Engine <span style="font-weight:500;color:var(--text-light);font-size:6px;">scoring</span></span>
+          <span style="white-space:nowrap;font-size:6px;font-weight:700;padding-left:4px;"><span style="color:var(--text-light);font-size:7px;">→ </span><span style="color:var(--green);">Allow</span> · <span style="color:var(--red);">Block</span> · <span style="color:var(--orange);">Flag</span></span>
+        </div>
+        <div style="text-align:center;color:var(--text-light);font-size:7px;line-height:1;">▼</div>
+        <div style="text-align:center"><span style="display:inline-block;border:1.5px solid var(--orange);border-radius:4px;padding:2px 10px;font-size:6.5px;font-weight:700;color:var(--orange);">Audit Log · Metrics</span></div>
       </div>
-      <ul class="bullet-list" style="margin-top:6px">
-        <li>Prompt injection intercepted at transport layer</li>
-        <li>Data exfiltration caught before leaving the stack</li>
-        <li>A2A traffic inspected inbound and outbound</li>
-        <li>ONNX-compatible — bring your own detection models</li>
-        <li>Rules update dynamically — no system restart</li>
-      </ul>
     </div>
   </div>
 
