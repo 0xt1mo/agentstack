@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentStack — Product Sheet</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #F26522;
+      --orange-light: #FFF3EC;
+      --dark: #1A1A2E;
+      --text: #2D2D3F;
+      --text-light: #5A5A72;
+      --border: #E5E5EF;
+      --bg-light: #F8F8FC;
+      --blue: #3B82F6;
+      --purple: #8B5CF6;
+      --green: #10B981;
+      --red: #EF4444;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.5in 0.55in 0.45in;
+      position: relative;
+      page-break-after: always;
+      background: white;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        padding: 0.5in 0.55in 0.45in;
+        page-break-after: always;
+        min-height: unset;
+        height: 11in;
+        overflow: hidden;
+      }
+    }
+
+    @media screen {
+      body { background: #e0e0e0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.15); margin-top: 20px; margin-bottom: 20px; }
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.12in;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-mark {
+      height: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .logo-mark img { height: 100%; }
+    .logo-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 0.02em;
+    }
+    .logo-sub {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Title block ── */
+    .title-block { margin-bottom: 0.15in; }
+    .title-block h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .title-block h1 span { color: var(--orange); }
+    .title-block .tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-light);
+      max-width: 5.5in;
+    }
+
+    /* ── Orange divider ── */
+    .divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange) 0%, var(--orange) 30%, var(--border) 30%);
+      margin-bottom: 0.14in;
+      border-radius: 2px;
+    }
+
+    /* ── Two-column layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.22in;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.2in;
+    }
+
+    /* ── Content text ── */
+    .body-text {
+      font-size: 9px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .body-text strong { font-weight: 700; color: var(--dark); }
+
+    /* ── Section headers ── */
+    .section-header {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .section-title span { color: var(--orange); }
+
+    /* ── Stat callouts ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.12in;
+      margin-bottom: 0.12in;
+    }
+    .stat-box {
+      background: var(--orange-light);
+      border-radius: 8px;
+      padding: 9px 12px;
+      border-left: 3px solid var(--orange);
+    }
+    .stat-number {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .stat-label {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+
+    /* ── Feature boxes ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .feature-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .feature-box .icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    .feature-box h4 {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+    .feature-box p {
+      font-size: 8.5px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* ── Bullet lists ── */
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+    }
+    .bullet-list li {
+      font-size: 8.5px;
+      line-height: 1.45;
+      color: var(--text);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+    .bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+    }
+
+    /* ── Comparison table ── */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+      margin-top: 8px;
+    }
+    .comp-table th {
+      background: var(--dark);
+      color: white;
+      font-weight: 700;
+      padding: 7px 10px;
+      text-align: left;
+      font-size: 8.5px;
+    }
+    .comp-table th:first-child { border-radius: 6px 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 6px 0 0; }
+    .comp-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .comp-table tr:nth-child(even) td { background: var(--bg-light); }
+    .comp-table .check { color: var(--green); font-weight: 700; }
+    .comp-table .cross { color: var(--red); font-weight: 700; }
+    .comp-table td:first-child { font-weight: 600; color: var(--dark); }
+
+    /* ── Architecture diagram ── */
+    .arch-diagram {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 6px 0;
+    }
+    .arch-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+      justify-content: center;
+    }
+    .arch-box {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 8px;
+      font-weight: 700;
+      text-align: center;
+      color: white;
+      min-width: 90px;
+    }
+    .arch-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .arch-label-right {
+      font-size: 7px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: right;
+      padding-right: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+    }
+    .arch-connector {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 10px;
+      margin: 2px 0;
+    }
+
+    /* ── CTA bar ── */
+    .cta-bar {
+      background: var(--dark);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.15in;
+    }
+    .cta-bar p {
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .cta-bar .cta-btn {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      position: absolute;
+      bottom: 0.35in;
+      left: 0.55in;
+      right: 0.55in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+    /* ── Persona boxes ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    .persona-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      border-top: 3px solid var(--orange);
+    }
+    .persona-box h4 {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .persona-box p {
+      font-size: 8px;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    /* ── SIF pipeline ── */
+    .pipeline {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+      margin: 8px 0;
+    }
+    .pipeline-stage {
+      flex: 1;
+      padding: 8px 8px;
+      text-align: center;
+      color: white;
+      position: relative;
+      font-size: 7.5px;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    .pipeline-stage:first-child { border-radius: 6px 0 0 6px; }
+    .pipeline-stage:last-child { border-radius: 0 6px 6px 0; }
+    .pipeline-stage .stage-label {
+      font-size: 6.5px;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .deploy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .deploy-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .deploy-box h5 {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .deploy-box p {
+      font-size: 7.5px;
+      color: var(--text-light);
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ PAGE 1 ════════════════════ -->
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="logo-area">
+        <div class="logo-mark">
+          <img src="UnicityLogo-dark.svg" alt="Unicity" />
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:8px;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Product Sheet</div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <h1>Agent<span>Stack</span></h1>
+    <p class="tagline">The open infrastructure layer for enterprise AI agents. Any agent. Any LLM. Any framework. Security by architecture, not by policy.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Two-column intro -->
+  <div class="two-col" style="margin-bottom: 0.12in;">
+    <div>
+      <div class="section-title">The OpenStack Moment <span>for AI Agents</span></div>
+      <p class="body-text">
+        In 2010, enterprises faced a familiar problem. Cloud computing was transforming infrastructure, but every workload ran on a single vendor's platform — locked in, opaque, impossible to audit. <strong>OpenStack solved it</strong> by building the infrastructure layer <em>underneath</em> the cloud.
+      </p>
+      <p class="body-text" style="margin-top:6px">
+        The AI agent ecosystem is at the same inflection point. Agents are deployed across every enterprise function. The productivity gains are real. But every agent runs on a framework built for experimentation, not production — with no shared security model, no audit trail, and no governance layer.
+      </p>
+      <p class="body-text" style="margin-top:6px">
+        <strong>AgentStack is the infrastructure layer underneath every agent framework.</strong>
+      </p>
+    </div>
+    <div>
+      <div class="section-title">The Problem: <span>Trust</span></div>
+      <p class="body-text">
+        Enterprise AI agent deployment is not blocked by capability. The models are capable. The use cases are clear. <strong>It is blocked by trust.</strong>
+      </p>
+      <p class="body-text" style="margin-top:6px">
+        Every framework handles security at the wrong layer — inside the model, via prompts and guardrails that rely on the LLM to police itself. A sufficiently crafted prompt injection defeats it. An indirect injection via a malicious document defeats it.
+      </p>
+      <p class="body-text" style="margin-top:6px">
+        The result is a security model built on the assumption that <strong>the thing being secured will cooperate in its own security</strong>. No enterprise security architect would accept this in any other context.
+      </p>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Enterprise blockers solved<br/>Portability, Audit, Governance, Interop</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">&lt;20ms</div>
+      <div class="stat-label">Classification latency<br/>Semantic Intercept Fabric</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Framework modifications required<br/>Any agent runs unchanged</div>
+    </div>
+  </div>
+
+  <!-- Architecture diagram -->
+  <div class="section-header">Architecture</div>
+  <div class="arch-diagram">
+    <div class="arch-label">Agent Frameworks & LLMs</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background:#64748b">LangChain</div>
+      <div class="arch-box" style="background:#64748b">AutoGen</div>
+      <div class="arch-box" style="background:#64748b">CrewAI</div>
+      <div class="arch-box" style="background:#64748b">Custom</div>
+      <div class="arch-box" style="background:#64748b">Any LLM</div>
+    </div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background:var(--purple);flex:1;max-width:100%">
+        Semantic Intercept Fabric (SIF) — Agent Firewall
+      </div>
+    </div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background:var(--orange);flex:1;max-width:100%">
+        AstridOS — Agent Runtime Microkernel
+      </div>
+    </div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-label">Kernel Primitives</div>
+    <div class="arch-row">
+      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">WASM<br/>Sandbox</div>
+      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Ed25519<br/>Auth</div>
+      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Immutable<br/>Audit</div>
+      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Human-in-<br/>the-Loop</div>
+      <div class="arch-box" style="background:var(--dark);font-size:7px;min-width:70px">Budget<br/>Enforce</div>
+    </div>
+  </div>
+
+  <!-- AstridOS + SIF -->
+  <div class="two-col" style="margin-top: 0.08in;">
+    <div>
+      <div class="section-header">AstridOS — The Agent Runtime</div>
+      <p class="body-text" style="margin-bottom:6px">
+        A <strong>user-space microkernel</strong>. Agents don't run alongside it — they run <em>on top</em> of it. Every framework, LLM frontend, and tool is a user-space process communicating over IPC. The enforcement layer lives in the kernel — below everything.
+      </p>
+      <p class="body-text" style="font-weight:600;color:var(--orange);font-size:9px">
+        You cannot prompt-inject your way past a kernel boundary.
+      </p>
+      <ul class="bullet-list" style="margin-top:6px">
+        <li><strong>WASM Capsule Sandbox</strong> — every tool runs in architectural isolation</li>
+        <li><strong>Ed25519 Authorization</strong> — actions signed cryptographically, not by prompt</li>
+        <li><strong>Immutable Audit</strong> — chain-linked, tamper-evident records</li>
+        <li><strong>Human-in-the-Loop</strong> — approval gates as kernel primitives</li>
+        <li><strong>Budget Enforcement</strong> — compute and API limits at runtime level</li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-header">SIF — The Agent Firewall</div>
+      <p class="body-text" style="margin-bottom:8px">
+        Every message — user↔agent, agent↔agent, agent↔tool — passes through SIF <strong>before it reaches the model</strong> and before it leaves the stack. Sub-20ms classification latency.
+      </p>
+      <div class="pipeline">
+        <div class="pipeline-stage" style="background:var(--purple)">Unified<br/>Server<div class="stage-label">Normalise</div></div>
+        <div class="pipeline-stage" style="background:#7c3aed">Rule<br/>Engine<div class="stage-label">Pattern Match</div></div>
+        <div class="pipeline-stage" style="background:#6d28d9">ML<br/>Detection<div class="stage-label">ONNX Inference</div></div>
+        <div class="pipeline-stage" style="background:#5b21b6">DLP<br/>Scanner<div class="stage-label">PII & Secrets</div></div>
+        <div class="pipeline-stage" style="background:var(--dark)">Decision<br/>Engine<div class="stage-label">Allow / Block / Flag</div></div>
+      </div>
+      <ul class="bullet-list" style="margin-top:6px">
+        <li>Prompt injection intercepted at transport layer</li>
+        <li>Data exfiltration caught before leaving the stack</li>
+        <li>A2A traffic inspected inbound and outbound</li>
+        <li>ONNX-compatible — bring your own detection models</li>
+        <li>Rules update dynamically — no system restart</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>unicity.ai</span>
+    <span>AgentStack Product Sheet — Page 1 of 2</span>
+    <span>github.com/unicitylabs/agentstack</span>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE 2 ════════════════════ -->
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="logo-area">
+        <div class="logo-mark">
+          <img src="UnicityLogo-dark.svg" alt="Unicity" />
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:8px;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.1em">Product Sheet</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Comparison table -->
+  <div class="section-header">Why Architecture Beats Policy</div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th style="width:28%">Capability</th>
+        <th style="width:36%">Policy-based Security</th>
+        <th style="width:36%">AgentStack</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Enforcement layer</td>
+        <td><span class="cross">&#10007;</span> Inside the model</td>
+        <td><span class="check">&#10003;</span> Below the model (kernel)</td>
+      </tr>
+      <tr>
+        <td>Prompt injection</td>
+        <td><span class="cross">&#10007;</span> Bypassable</td>
+        <td><span class="check">&#10003;</span> Intercepted before model</td>
+      </tr>
+      <tr>
+        <td>Authorization</td>
+        <td><span class="cross">&#10007;</span> Prompt instructions</td>
+        <td><span class="check">&#10003;</span> Ed25519 cryptographic signatures</td>
+      </tr>
+      <tr>
+        <td>Audit evidence</td>
+        <td><span class="cross">&#10007;</span> Log files (mutable)</td>
+        <td><span class="check">&#10003;</span> Tamper-evident cryptographic chain</td>
+      </tr>
+      <tr>
+        <td>Sandboxing</td>
+        <td><span class="cross">&#10007;</span> Best-effort</td>
+        <td><span class="check">&#10003;</span> Architectural (WASM)</td>
+      </tr>
+      <tr>
+        <td>Framework portability</td>
+        <td><span class="cross">&#10007;</span> Per-framework rebuild</td>
+        <td><span class="check">&#10003;</span> Any framework, unchanged</td>
+      </tr>
+      <tr>
+        <td>A2A security</td>
+        <td><span class="cross">&#10007;</span> None</td>
+        <td><span class="check">&#10003;</span> Inbound & outbound intercept</td>
+      </tr>
+      <tr>
+        <td>Human oversight</td>
+        <td><span class="cross">&#10007;</span> Optional add-on</td>
+        <td><span class="check">&#10003;</span> Architectural primitive</td>
+      </tr>
+      <tr>
+        <td>Air-gapped deployment</td>
+        <td><span class="cross">&#10007;</span> Not supported</td>
+        <td><span class="check">&#10003;</span> Fully supported</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Policy Dashboard -->
+  <div style="margin-top: 0.18in;">
+    <div class="section-header">Policy Dashboard</div>
+    <p class="body-text" style="margin-bottom:8px">
+      Content-based semantic security policies applied uniformly across every agent, framework, and session. Configure without model retraining or framework modification. Rules update dynamically and propagate immediately.
+    </p>
+    <div class="three-col">
+      <div>
+        <ul class="bullet-list">
+          <li>Prompt injection & indirect injection detection</li>
+          <li>Data leakage & IP exfiltration prevention</li>
+          <li>PII and credentials handling rules</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="bullet-list">
+          <li>Domain-specific ontologies (finance, healthcare, legal)</li>
+          <li>Transaction approval thresholds</li>
+          <li>Competitor & confidential information controls</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="bullet-list">
+          <li>Custom classification models via ONNX</li>
+          <li>No system restart for rule changes</li>
+          <li>Full GUI management (enterprise)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deployment -->
+  <div style="margin-top: 0.18in;">
+    <div class="section-header">Deployment Options</div>
+    <div class="deploy-grid" style="margin-top: 6px;">
+      <div class="deploy-box">
+        <h5>On-Premise</h5>
+        <p>Your hardware. Standard Linux, containers, Kubernetes. No external API dependency.</p>
+      </div>
+      <div class="deploy-box">
+        <h5>Private Cloud</h5>
+        <p>VPC deployment. Your keys, your audit logs, your network boundary. Helm chart provided.</p>
+      </div>
+      <div class="deploy-box">
+        <h5>Air-Gapped</h5>
+        <p>Fully offline for sovereign & classified environments. Updates via secure media.</p>
+      </div>
+      <div class="deploy-box">
+        <h5>Hybrid</h5>
+        <p>Core on-premise, policy management in private cloud. Mixed data residency support.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Who it's for -->
+  <div style="margin-top: 0.18in;">
+    <div class="section-header">Who It Is For</div>
+    <div class="persona-grid" style="margin-top: 6px;">
+      <div class="persona-box">
+        <h4>CTOs & Engineering Leaders</h4>
+        <p>Framework-agnostic infrastructure. Your existing agent code runs without modification. Sub-20ms overhead. ONNX-compatible. Open core — inspect, audit, and contribute to the infrastructure you run on.</p>
+      </div>
+      <div class="persona-box">
+        <h4>CISOs & Security Teams</h4>
+        <p>Closes the attack surface no framework addresses. Prompt injection intercepted at transport layer. Every action produces tamper-evident audit evidence. A2A traffic inspected in both directions. Approval gates cannot be routed around.</p>
+      </div>
+      <div class="persona-box">
+        <h4>Regulated Industries</h4>
+        <p>Audit chains satisfy regulators. On-premise satisfies data residency. Air-gapped satisfies sovereign constraints. Policy dashboard satisfies internal governance. Open core satisfies source code inspection rights.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Open source + Enterprise -->
+  <div style="margin-top: 0.18in;">
+    <div class="section-header">Open Source Core. Enterprise Licence.</div>
+    <div class="two-col">
+      <div>
+        <p class="body-text"><strong>Open source core:</strong> AstridOS runtime, SIF pipeline, and base policy engine — available under open licence. Deploy, inspect, and contribute.</p>
+      </div>
+      <div>
+        <p class="body-text"><strong>Enterprise licence adds:</strong> Policy Dashboard GUI, compliance reporting (ADGM, FCA, HIPAA, SOC2, ISO 27001), SIEM integration, SSO, priority support, air-gapped deployment, custom model loading.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar">
+    <p>Ready to deploy enterprise-grade agent infrastructure?</p>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span style="color:white;font-size:9px;opacity:0.7">github.com/unicitylabs/agentstack</span>
+      <div class="cta-btn">Contact Us</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>unicity.ai</span>
+    <span>AgentStack Product Sheet — Page 2 of 2</span>
+    <span>Developed by Unicity Labs</span>
+  </div>
+</div>
+
+</body>
+</html>
